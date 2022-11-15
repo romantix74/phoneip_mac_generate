@@ -35,7 +35,17 @@ if __name__ == '__main__':
     ats_data = parse_ats_out()
     switch_data = parse_switch_out()
 
-    print(ats_data)
-    print(switch_data)
+    for ats_line in ats_data:
+        # находим IP в списке с АТС
+        ip = ats_line.split()[1]
+
+        # теперь для каждого найденного IP ищем строку в файле данных от коммутатора
+        for switch_line in switch_data:
+            if ip in switch_line:
+                # находим mac
+                mac = switch_line.split()[1]
+                print(f"{ats_line} {mac}")
+
+
 
 
